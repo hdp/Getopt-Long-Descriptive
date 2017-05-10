@@ -14,6 +14,7 @@ WriteMakefile(
     'Params::Validate' => '0.74',
     'Sub::Exporter'    => 0.972, # generator name with \'name'
     'Test::More'       => 0,
+    'Term::ReadKey'    => 0,
   },
   dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
   clean               => { FILES => 'Getopt-Long-Descriptive-*' },

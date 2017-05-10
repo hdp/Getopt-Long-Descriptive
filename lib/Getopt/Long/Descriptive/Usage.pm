@@ -5,6 +5,7 @@ use warnings;
 our $VERSION = '0.088';
 
 use List::Util qw(max);
+use Term::ReadKey qw(GetTerminalSize);
 
 =head1 NAME
 
@@ -46,6 +47,9 @@ sub new {
 
   my %copy;
   @copy{ @to_copy } = @$arg{ @to_copy };
+
+  my @terminal_size = GetTerminalSize();
+  $copy{terminal_width} = $terminal_size[0] ? $terminal_size[0] : 78;
 
   bless \%copy => $class;
 }
@@ -118,7 +122,7 @@ sub _split_description {
   my ($self, $length, $desc) = @_;
 
   # 8 for a tab, 2 for the space between option & desc;
-  my $max_length = 78 - ( $length + 8 + 2 );
+  my $max_length = $self->{terminal_width} - ( $length + 8 + 2 );
 
   return $desc if length $desc <= $max_length;
 
